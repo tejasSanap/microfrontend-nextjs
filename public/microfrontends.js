@@ -1,24 +1,86 @@
-window.ComponentA = {
+// import React from "react";
+// import ReactDOM from "react-dom";
+
+// // Component A
+// function ComponentA() {
+//   return (
+//     <div style={{ padding: 20, background: "lightblue" }}>
+//       This is Component A
+//     </div>
+//   );
+// }
+
+// // Component B
+// function ComponentB() {
+//   return (
+//     <div style={{ padding: 20, background: "lightgreen" }}>
+//       This is Component B
+//     </div>
+//   );
+// }
+
+// // Single-SPA Application
+// const nextjsApp = {
+//   bootstrap: () => Promise.resolve(),
+//   mount: (props) => {
+//     return new Promise((resolve) => {
+//       const container = document.createElement("div");
+//       container.id = "nextjs-app-container";
+//       document.body.appendChild(container);
+
+//       ReactDOM.render(<ComponentA {...props} />, container);
+//       resolve();
+//     });
+//   },
+//   unmount: () => {
+//     return new Promise((resolve) => {
+//       const container = document.getElementById("nextjs-app-container");
+//       if (container) {
+//         ReactDOM.unmountComponentAtNode(container);
+//         container.remove();
+//       }
+//       resolve();
+//     });
+//   },
+// };
+
+// // Export the Single-SPA application
+// export default nextjsApp;
+
+
+import React from "react";
+import ReactDOM from "react-dom";
+
+// Component A
+function ComponentA() {
+  return (
+    <div style={{ padding: 20, background: "lightblue" }}>
+      This is Component A
+    </div>
+  );
+}
+
+// Single-SPA Parcel Configuration
+export const AICenterComponent = {
   bootstrap: () => Promise.resolve(),
-  mount: (props) =>
-    import("./microfrontends/ComponentA.js").then((mod) => mod.mount(props)),
-  unmount: () =>
-    import("./microfrontends/ComponentA.js").then((mod) => mod.unmount()),
+  mount: (props) => {
+    return new Promise((resolve) => {
+      const container = document.createElement("div");
+      container.id = "ai-center-container";
+      document.body.appendChild(container);
+
+      ReactDOM.render(<ComponentA {...props} />, container);
+      resolve();
+    });
+  },
+  unmount: () => {
+    return new Promise((resolve) => {
+      const container = document.getElementById("ai-center-container");
+      if (container) {
+        ReactDOM.unmountComponentAtNode(container);
+        container.remove();
+      }
+      resolve();
+    });
+  },
 };
-
-window.ComponentB = {
-  bootstrap: () => Promise.resolve(),
-  mount: (props) =>
-    import("./microfrontends/ComponentB.js").then((mod) => mod.mount(props)),
-  unmount: () =>
-    import("./microfrontends/ComponentB.js").then((mod) => mod.unmount()),
-};
-
-// const createApp = (name) => ({
-//   bootstrap: () => Promise.resolve(console.log(`${name} bootstrapped`)),
-//   mount: () => Promise.resolve(console.log(`${name} mounted`)),
-//   unmount: () => Promise.resolve(console.log(`${name} unmounted`)),
-// });
-
-// window.ComponentA = createApp("ComponentA");
-// window.ComponentB = createApp("ComponentB");

@@ -4,7 +4,9 @@ const nextConfig: NextConfig = {
   async headers() {
     return [
       {
-        source: "/microfrontends.js",
+        // source: "/microfrontends.js",
+        // source: "/build/my-component.js",
+        source: "/build/microfrontends.js",
         // source: "/microfrontends/:path*",
         
         // source: "/lib/index.js",
